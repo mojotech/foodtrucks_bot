@@ -2,7 +2,7 @@ defmodule FoodtruckBot.Slack do
   use Slack
 
   def handle_message(message = %{type: "message"}, slack) do
-    Logger.debug "MESSAGE: #{inspect message}\nME ID: #{slack.me.id}"
+    # Logger.debug "MESSAGE: #{inspect message}\nME ID: #{slack.me.id}"
     cond do
       Dict.has_key?(message, :text) -> parse_message(message, slack)
       true -> {:ok}
