@@ -42,7 +42,8 @@ config :foodtruck_bot, FoodtruckBot.Twitter,
     "PORTU_GALO",
     "ocreperi",
     "soulfullri",
-    "Citizenwings"
+    "Citizenwings",
+    "openseasontruck"
   ]
 
 config :logger, :console, format: "[$level] $message\n", level: :debug
