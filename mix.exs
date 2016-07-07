@@ -14,7 +14,7 @@ defmodule FoodtruckBot.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :slack, :extwitter],
+    [applications: [:logger, :slack, :extwitter, :timex],
      mod: {FoodtruckBot, []}]
   end
 
@@ -32,7 +32,8 @@ defmodule FoodtruckBot.Mixfile do
       {:slack, "~> 0.7.0"},
       {:websocket_client, git: "https://github.com/jeremyong/websocket_client"},
       {:oauth, github: "tim/erlang-oauth"},
-      {:extwitter, "~> 0.7.1"}
+      {:extwitter, "~> 0.7.1"},
+      {:timex, "~> 2.2.1"}
     ]
   end
 end
