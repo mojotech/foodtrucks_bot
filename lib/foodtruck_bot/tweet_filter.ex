@@ -1,4 +1,6 @@
 defmodule FoodtruckBot.TweetFilter do
+  @twitter_date_format "{WDshort} {Mshort} {D} {h24}:{m}:{s} {Z} {YYYY}"
+
   @doc """
   Finds the first tweet that gives the location of a food truck today
   """
@@ -12,12 +14,18 @@ defmodule FoodtruckBot.TweetFilter do
     end
   end
 
-  @doc """
-  Determines if a tweet's content places the location of a truck in Kennedy
-  Plaze for the current day.
-  """
+  @spec useful_info(ExTwitter.Model.Tweet) :: boolean()
+  defp useful_info(tweet) do
+    cond do
+      from_today(tweet) -> true
+      true -> false
+    end
+  end
 
-  @spec useful_info(ExTwitter.Model.Tweet) :: bool()
-  defp useful_info(tweet), do: true
-
+  @spec from_today(ExTwitter.Model.Tweet) :: boolean()
+  defp from_today(tweet) do
+    {:ok, parsed} = Timex.parse(tweet.created_at, @twitter_date_format)
+    today = Timex.DateTime.today
+    {parsed.year, parsed.month, parsed.day} == {today.year, today.month, today.day}
+  end
 end
