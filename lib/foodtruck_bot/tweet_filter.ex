@@ -9,7 +9,7 @@ defmodule FoodtruckBot.TweetFilter do
   def todays_location([]), do: nil
   def todays_location([tweet | rest]) do
     cond do
-      useful_info(tweet.text) -> tweet
+      useful_info(tweet) -> tweet
       true -> todays_location(rest)
     end
   end
@@ -17,7 +17,7 @@ defmodule FoodtruckBot.TweetFilter do
   @spec useful_info(ExTwitter.Model.Tweet) :: boolean()
   defp useful_info(tweet) do
     cond do
-      from_today(tweet) -> true
+      from_today(tweet) -> about_kennedy_plaza?(tweet.text)
       true -> false
     end
   end
@@ -27,5 +27,10 @@ defmodule FoodtruckBot.TweetFilter do
     {:ok, parsed} = Timex.parse(tweet.created_at, @twitter_date_format)
     today = Timex.DateTime.today
     {parsed.year, parsed.month, parsed.day} == {today.year, today.month, today.day}
+  end
+
+  @spec about_kennedy_plaza?(ExTwitter.Model.Tweet) :: boolean()
+  defp about_kennedy_plaza?(text) do
+    Regex.match? ~r/kp|kennedy|burnside/i, text
   end
 end
