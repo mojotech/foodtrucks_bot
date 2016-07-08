@@ -3,6 +3,8 @@ defmodule FoodtruckBot.TweetFilter do
 
   @doc """
   Finds the first tweet that gives the location of a food truck today
+
+  Returns nil if not useful tweet found.
   """
 
   @spec todays_location([ExTwitter.Model.Tweet]) :: ExTwitter.Model.Tweet
