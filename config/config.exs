@@ -43,6 +43,7 @@ config :foodtruck_bot, FoodtruckBot.Twitter,
     "ocreperi",
     "soulfullri",
     "Citizenwings",
+    "gastros401",
     "openseasontruck"
   ]
 
