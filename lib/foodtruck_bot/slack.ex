@@ -1,21 +1,19 @@
 defmodule FoodtruckBot.Slack do
   use Slack
 
-  def handle_message(message = %{type: "message"}, slack) do
-    # Logger.debug "MESSAGE: #{inspect message}\nME ID: #{slack.me.id}"
-    cond do
-      Dict.has_key?(message, :text) -> parse_message(message, slack)
-      true -> {:ok}
+  def handle_event(message = %{type: "message"}, slack, state) do
+    if Map.has_key?(message, :text) do
+      parse_message(message, slack, state)
     end
+
+    {:ok, state}
   end
-  def handle_message(_, _), do: {:ok}
+  def handle_event(_, _, state), do: {:ok, state}
 
-  defp parse_message(message, slack) do
+  defp parse_message(message, slack, state) do
     if Regex.run ~r/<@#{slack.me.id}>:?\s+.*today.*/, message.text do
-      {:ok, _pid} = Task.Supervisor.start_child(FoodtruckBot.TaskSupervisor, fn -> FoodtruckBot.Twitter.fetch_trucks(message.channel, slack) end)
-      send_message("Checking today's trucks...", message.channel, slack)
+      Task.start fn() -> FoodtruckBot.Twitter.fetch_trucks(message, slack) end
+      send_message("Checking today's trucks...", message.channel, slack) 
     end
-
-    {:ok}
   end
 end
