@@ -11,8 +11,8 @@ defmodule FoodtruckBot do
     children = [
       # Define workers and child supervisors to be supervised
       # worker(FoodtruckBot.Worker, [arg1, arg2, arg3]),
-      supervisor(Task.Supervisor, [[name: FoodtruckBot.TaskSupervisor]]),
-      worker(FoodtruckBot.Slack, [slack_token])
+      supervisor(Task.Supervisor, [[name: FoodtruckBot.TaskSupervisor]], restart: :transient),
+      worker(Slack.Bot, [FoodtruckBot.Slack, [], slack_token])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
