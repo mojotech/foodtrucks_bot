@@ -27,7 +27,7 @@ defmodule FoodtruckBot.TweetFilter do
   @spec from_today(ExTwitter.Model.Tweet) :: boolean()
   defp from_today(tweet) do
     {:ok, parsed} = Timex.parse(tweet.created_at, @twitter_date_format)
-    today = Timex.DateTime.today
+    today = Timex.today
     {parsed.year, parsed.month, parsed.day} == {today.year, today.month, today.day}
   end
 

@@ -32,7 +32,7 @@ defmodule FoodtruckBot.Mixfile do
       {:slack, "~> 0.11.0"},
       {:oauth, github: "tim/erlang-oauth"},
       {:extwitter, "~> 0.7.1"},
-      {:timex, "~> 2.2.1"}
+      {:timex, "~> 3.1.13"}
     ]
   end
 end
