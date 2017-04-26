@@ -1,7 +1,6 @@
 defmodule FoodtruckBot.Twitter do
 
   alias FoodtruckBot.TweetFilter
-  alias ExTwitter.Model.Tweet
   alias ExTwitter.API.Timelines
 
   import Slack.Sends, only: [send_message: 3]
@@ -30,7 +29,7 @@ defmodule FoodtruckBot.Twitter do
     msg = "<@#{user}> No trucks today... Or at least they aren't using the Twitters.  Maybe just look out the window instead?"
     msg |> send_message(channel, slack)
   end
-  defp send_completion_message(tweets, %{channel: channel}, slack) do 
+  defp send_completion_message(tweets, %{channel: channel}, slack) do
     tweets |> Enum.each(&(Slack.Sends.send_message(&1, channel, slack)))
   end
 
