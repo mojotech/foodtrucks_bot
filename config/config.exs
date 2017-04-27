@@ -44,6 +44,10 @@ config :foodtruck_bot, FoodtruckBot.Twitter,
     "soulfullri",
     "Citizenwings",
     "gastros401",
+    "soulfullri",
+    "redskitchn",
+    "itssaladman",
+    "igottaq",
     "openseasontruck"
   ]
 
