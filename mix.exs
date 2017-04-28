@@ -30,8 +30,9 @@ defmodule FoodtruckBot.Mixfile do
   defp deps do
     [
       {:slack, "~> 0.11.0"},
+      # {:slack, github: "BlakeWilliams/Elixir-Slack"},
       {:oauth, github: "tim/erlang-oauth"},
-      {:extwitter, "~> 0.7.1"},
+      {:extwitter, "~> 0.8.3"},
       {:timex, "~> 3.1.13"}
     ]
   end
