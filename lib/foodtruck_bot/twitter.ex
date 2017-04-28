@@ -9,7 +9,7 @@ defmodule FoodtruckBot.Twitter do
 
   @spec fetch_trucks(String.t, %Slack.State{}) :: {:ok}
   def fetch_trucks(message, slack) do
-    stream = Task.Supervisor.async_stream(FoodtruckBot.TaskSupervisor, @trucks, __MODULE__, :fetch_truck, [message, slack])
+    stream = Task.Supervisor.async_stream(FoodtruckBot.TaskSupervisor, @trucks, __MODULE__, :fetch_truck, [message])
 
     stream
     |> Enum.to_list
@@ -18,7 +18,7 @@ defmodule FoodtruckBot.Twitter do
     |> send_completion_message(message, slack)
   end
 
-  def fetch_truck(truck, %{channel: channel}, slack) do
+  def fetch_truck(truck, %{channel: channel}) do
     tweets = Timelines.user_timeline(timeline_options(truck))
 
     tweets
