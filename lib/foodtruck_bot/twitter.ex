@@ -14,6 +14,7 @@ defmodule FoodtruckBot.Twitter do
     stream
     |> Enum.to_list
     |> Enum.filter(&truck_out_today/1)
+    |> Keyword.values()
     |> send_completion_message(message, slack)
   end
 
