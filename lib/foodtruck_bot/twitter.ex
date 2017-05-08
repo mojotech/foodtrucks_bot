@@ -7,6 +7,23 @@ defmodule FoodtruckBot.Twitter do
 
   @trucks Application.get_env(:foodtruck_bot, __MODULE__)[:trucks]
 
+  @responses [
+    "",
+    "",
+    "",
+    " Maybe just look out the window instead?",
+    "",
+    " Sorry, Charlie.",
+    "",
+    " Here's a thought, go for a walk and look and report back to everyone else.",
+    "",
+    " Kids these days...",
+    "",
+    "",
+    "",
+    ""
+  ]
+
   @spec fetch_trucks(String.t, %Slack.State{}) :: {:ok}
   def fetch_trucks(message, slack) do
     stream = Task.Supervisor.async_stream(FoodtruckBot.TaskSupervisor, @trucks, __MODULE__, :fetch_truck, [message])
@@ -27,7 +44,8 @@ defmodule FoodtruckBot.Twitter do
   end
 
   defp send_completion_message([], %{channel: channel, user: user}, slack) do
-    msg = "<@#{user}> No trucks today... Or at least they aren't using the Twitters.  Maybe just look out the window instead?"
+    quip = Enum.random(@responses)
+    msg = "<@#{user}> No trucks today... Or at least they aren't using the Twitters." <> quip
     msg |> send_message(channel, slack)
   end
   defp send_completion_message(tweets, %{channel: channel}, slack) do
