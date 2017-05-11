@@ -5,8 +5,6 @@ defmodule FoodtruckBot.Twitter do
 
   import Slack.Sends, only: [send_message: 3]
 
-  @trucks Application.get_env(:foodtruck_bot, __MODULE__)[:trucks]
-
   @responses [
     "",
     "",
@@ -26,7 +24,8 @@ defmodule FoodtruckBot.Twitter do
 
   @spec fetch_trucks(String.t, %Slack.State{}) :: {:ok}
   def fetch_trucks(message, slack) do
-    stream = Task.Supervisor.async_stream(FoodtruckBot.TaskSupervisor, @trucks, __MODULE__, :fetch_truck, [message])
+    trucks = Task.async fn -> FoodtruckBot.Trucks.all() end
+    stream = Task.Supervisor.async_stream(FoodtruckBot.TaskSupervisor, Task.await(trucks), __MODULE__, :fetch_truck, [message])
 
     stream
     |> Enum.to_list

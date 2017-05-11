@@ -38,26 +38,6 @@ config :foodtruck_bot, FoodtruckBot.Database,
 config :foodtruck_bot, FoodtruckBot.Slack,
   token: System.get_env("SLACK_TOKEN")
 
-config :foodtruck_bot, FoodtruckBot.Twitter,
-  trucks: [
-    "pocolocotacos",
-    "mijostacos",
-    "rockettruck",
-    "NobleKnots",
-    "MamaKimsKbbq",
-    "PORTU_GALO",
-    "ocreperi",
-    "soulfullri",
-    "Citizenwings",
-    "gastros401",
-    "soulfullri",
-    "redskitchn",
-    "igottaq",
-    "openseasontruck",
-    "bonme",
-    "bowledflavor"
-  ]
-
 config :logger, :console, format: "[$level] $message\n", level: :debug
 
 config :extwitter, :oauth, [
