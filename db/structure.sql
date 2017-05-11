@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS trucks (
+       id SERIAL PRIMARY KEY,
+       handle VARCHAR(50) NOT NULL
+);

@@ -15,5 +15,12 @@ defmodule FoodtruckBot.Slack do
       send_message("Checking today's trucks...", message.channel, slack)
       Task.start fn() -> FoodtruckBot.Twitter.fetch_trucks(message, slack) end
     end
+
+    if Regex.run ~r/<@#{slack.me.id}>:?\s+.*watch.*/, message.text do
+      twitter_regex = ~r/(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9]+)/
+      truck_handle = Regex.scan(twitter_regex, message.text) |> List.last |> List.first
+
+      Task.start fn -> FoodtruckBot.Trucks.watch(truck_handle, message, slack) end
+    end
   end
 end

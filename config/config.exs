@@ -29,27 +29,14 @@ use Mix.Config
 #
 #     import_config "#{Mix.env}.exs"
 
+config :foodtruck_bot, FoodtruckBot.Database,
+  hostname: System.get_env("DATABASE_HOSTNAME") || "localhost",
+  username: System.get_env("DATABASE_USERNAME"),
+  password: System.get_env("DATABASE_PASSWORD"),
+  name: System.get_env("DATABASE_NAME") || "trucks"
+
 config :foodtruck_bot, FoodtruckBot.Slack,
   token: System.get_env("SLACK_TOKEN")
-
-config :foodtruck_bot, FoodtruckBot.Twitter,
-  trucks: [
-    "pocolocotacos",
-    "mijostacos",
-    "rockettruck",
-    "NobleKnots",
-    "MamaKimsKbbq",
-    "PORTU_GALO",
-    "ocreperi",
-    "soulfullri",
-    "Citizenwings",
-    "gastros401",
-    "soulfullri",
-    "redskitchn",
-    "itssaladman",
-    "igottaq",
-    "openseasontruck"
-  ]
 
 config :logger, :console, format: "[$level] $message\n", level: :debug
 
