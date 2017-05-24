@@ -36,11 +36,15 @@ defmodule FoodtruckBot.Twitter do
   end
 
   def fetch_truck(truck, %{channel: channel}) do
-    tweets = Timelines.user_timeline(timeline_options(truck))
+    try do
+      tweets = Timelines.user_timeline(timeline_options(truck))
 
-    tweets
-    |> TweetFilter.todays_location
-    |> tweet_status_url
+      tweets
+      |> TweetFilter.todays_location
+      |> tweet_status_url
+    rescue
+      e -> tweet_status_url(nil)
+    end
   end
 
   defp send_completion_message([], %{channel: channel, user: user}, slack) do

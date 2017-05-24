@@ -46,7 +46,6 @@ config :foodtruck_bot, FoodtruckBot.Twitter,
     "gastros401",
     "soulfullri",
     "redskitchn",
-    "itssaladman",
     "igottaq",
     "openseasontruck"
   ]
