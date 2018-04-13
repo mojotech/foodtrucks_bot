@@ -14,7 +14,7 @@ defmodule FoodtruckBot.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :slack, :extwitter, :timex],
+    [applications: [:logger, :slack, :extwitter, :timex, :postgrex],
      mod: {FoodtruckBot, []}]
   end
 
@@ -33,7 +33,8 @@ defmodule FoodtruckBot.Mixfile do
       # {:slack, github: "BlakeWilliams/Elixir-Slack"},
       {:oauth, github: "tim/erlang-oauth"},
       {:extwitter, "~> 0.8.3"},
-      {:timex, "~> 3.1.13"}
+      {:timex, "~> 3.1.13"},
+      {:postgrex, "~> 0.13.2"}
     ]
   end
 end
