@@ -48,7 +48,6 @@ config :foodtruck_bot, FoodtruckBot.Twitter,
     "redskitchn",
     "igottaq",
     "openseasontruck",
-    "bonme",
     "bowledflavor"
   ]
 
