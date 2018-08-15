@@ -33,6 +33,6 @@ defmodule FoodtruckBot.TweetFilter do
 
   @spec about_kennedy_plaza?(ExTwitter.Model.Tweet) :: boolean()
   defp about_kennedy_plaza?(text) do
-    Regex.match? ~r/kp|kennedy|burnside/i, text
+    Regex.match? ~r/(kp|kennedy|burnside)\s+/i, text
   end
 end
