@@ -8,12 +8,13 @@ defmodule FoodtruckBot.Slack do
 
     {:ok, state}
   end
+
   def handle_event(_, _, state), do: {:ok, state}
 
   defp parse_message(message, slack) do
-    if Regex.run ~r/<@#{slack.me.id}>:?\s+.*today.*/, message.text do
+    if Regex.run(~r/<@#{slack.me.id}>:?\s+.*today.*/, message.text) do
       send_message("Checking today's trucks...", message.channel, slack)
-      Task.start fn() -> FoodtruckBot.Twitter.fetch_trucks(message, slack) end
+      Task.start(fn -> FoodtruckBot.Twitter.fetch_trucks(message, slack) end)
     end
   end
 end
