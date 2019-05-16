@@ -48,7 +48,8 @@ config :foodtruck_bot, FoodtruckBot.Twitter,
     "igottaq",
     "openseasontruck",
     "bowledflavor",
-    "hg80food"
+    "hg80food",
+    "TwistedTs_RI"
   ]
 
 config :logger, :console, format: "[$level] $message\n", level: :debug
