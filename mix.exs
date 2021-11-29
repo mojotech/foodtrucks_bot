@@ -2,20 +2,21 @@ defmodule FoodtruckBot.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :foodtruck_bot,
-     version: "1.0.0",
-     elixir: "~> 1.8",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :foodtruck_bot,
+      version: "1.0.0",
+      elixir: "~> 1.8",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :slack, :extwitter, :timex],
-     mod: {FoodtruckBot, []}]
+    [applications: [:logger, :slack, :extwitter, :timex], mod: {FoodtruckBot, []}]
   end
 
   # Dependencies can be Hex packages:
