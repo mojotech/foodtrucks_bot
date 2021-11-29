@@ -29,7 +29,7 @@ defmodule FoodtruckBot.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:slack, "0.19.0"},
+      {:slack, "0.23.5"},
       # {:slack, github: "BlakeWilliams/Elixir-Slack"},
       {:oauth, github: "tim/erlang-oauth"},
       {:extwitter, "~> 0.8.3"},
